@@ -1,0 +1,70 @@
+m255
+K4
+z2
+!s99 nomlopt
+!s11f vlog 2021.3 2021.07, Jul 13 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/jstine/wallace/submit/HSCASpring2023/Wallace
+T_opt
+!s110 1679527313
+VV9Ve:4D3F`f5MgOjCPH531
+04 8 4 work stimulus fast 0
+=1-000ae431a4f1-641b8d90-ea749-2d4fcb
+!s124 OEM100
+o-quiet -auto_acc_if_foreign -work work +acc
+Z1 tCvgOpt 0
+n@_opt
+OE;O;2021.3;73
+vmult_cs
+Z2 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z3 !s110 1679527312
+!i10b 1
+!s100 jcO=l?QcO;bR7fgE2hSLM0
+I[:hz8RGZMA5fEh:Rl=4WD3
+S1
+R0
+Z4 w1679527299
+8mult_cs.sv
+Fmult_cs.sv
+!i122 0
+L0 1 75
+Z5 VDg1SIo80bB@j0V0VzS_@n1
+Z6 OE;L;2021.3;73
+r1
+!s85 0
+31
+Z7 !s108 1679527312.000000
+Z8 !s107 tb.sv|mult_cs.sv|
+Z9 !s90 mult_cs.sv|tb.sv|
+!i113 0
+Z10 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R1
+vstimulus
+R2
+R3
+!i10b 1
+!s100 URQ_2AR>L@[7`Yk_U8gC00
+IAW0XODOTV1K6X=T6O3ajQ1
+S1
+R0
+R4
+8tb.sv
+Ftb.sv
+!i122 0
+L0 2 68
+R5
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 0
+R10
+R1

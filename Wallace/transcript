@@ -1,23 +1,24 @@
 # do wallace.do
-# Model Technology ModelSim SE vlog 2021.3 Compiler 2021.07 Jul 13 2021
-# Start time: 18:21:52 on Mar 22,2023
+# QuestaSim-64 vlog 2021.3_1 Compiler 2021.08 Aug 15 2021
+# Start time: 12:54:01 on Dec 19,2023
 # vlog mult_cs.sv tb.sv 
 # -- Compiling module mult_cs
 # -- Compiling module stimulus
 # 
 # Top level modules:
 # 	stimulus
-# End time: 18:21:52 on Mar 22,2023, Elapsed time: 0:00:00
+# End time: 12:54:01 on Dec 19,2023, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -voptargs="+acc" work.stimulus 
-# Start time: 18:21:52 on Mar 22,2023
+# Start time: 12:54:01 on Dec 19,2023
 # ** Note: (vsim-3812) Design is being optimized...
-# //  ModelSim SE 2021.3 Jul 13 2021 Linux 5.19.0-35-generic
+# //  Questa Sim-64
+# //  Version 2021.3_1 linux_x86_64 Aug 15 2021
 # //
 # //  Copyright 1991-2021 Mentor Graphics Corporation
 # //  All Rights Reserved.
 # //
-# //  ModelSim SE and its associated documentation contain trade
+# //  QuestaSim and its associated documentation contain trade
 # //  secrets and commercial or financial information that are the property of
 # //  Mentor Graphics Corporation and are privileged, confidential,
 # //  and exempt from disclosure under the Freedom of Information Act,
@@ -36,8 +37,8 @@
 # configure wave not supported in batch mode
 # configure wave not supported in batch mode
 # configure wave not supported in batch mode
-#         64 tests completed with          0 errors
-# ** Note: $finish    : tb.sv(66)
-#    Time: 645 ns  Iteration: 2  Instance: /stimulus
-# End time: 18:21:53 on Mar 22,2023, Elapsed time: 0:00:01
+#          8 tests completed with          0 errors
+# ** Note: $finish    : tb.sv(63)
+#    Time: 85 ns  Iteration: 2  Instance: /stimulus
+# End time: 12:54:02 on Dec 19,2023, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0

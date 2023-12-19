@@ -35,31 +35,28 @@ module stimulus;
 
    initial
      begin
-	for (j=0; j < 4; j=j+1)
+	for (j=0; j < 16; j=j+1)
 	  begin
-	     for (i=0; i < 4; i=i+1) 
+	     // Put vectors before beginning of clk
+	     @(posedge clk)
 	       begin
-		  // Put vectors before beginning of clk
-		  @(posedge clk)
-		  begin
-		     a = $random;
-		     b = $random;
-		  end
-		  @(negedge clk)
+		  a = $random;
+		  b = $random;
+	       end
+	     @(negedge clk)
+	       begin
+		  z_correct = a+b;
+		  vectornum = vectornum + 1;		       
+		  if (z_correct != z)
 		    begin
-		       z_correct = a+b;
-		       vectornum = vectornum + 1;		       
-		       if (z_correct != z)
-			 begin
-			    errors = errors + 1;
-			    $display("%h %h || %h %h", 
-				     a, b, z, z_correct);
-			 end		       
-		       #0 $fdisplay(handle3, "%h %h || %h %h %b", 
-				    a, b, z, z_correct, (z == z_correct));
-		    end // @(negedge clk)		  
-	       end // for (i=0; i < 16; i=i+1)
-	  end // for (j=0; j < 4; j=j+1)
+		       errors = errors + 1;
+		       $display("%h %h || %h %h", 
+				a, b, z, z_correct);
+		    end		       
+		  #0 $fdisplay(handle3, "%h %h || %h %h %b", 
+			       a, b, z, z_correct, (z == z_correct));
+	       end // @(negedge clk)		  
+	  end // for (i=0; i < 16; i=i+1)
 	$display("%d tests completed with %d errors", vectornum, errors);
 	$finish;	
      end // initial begin   

@@ -11,10 +11,10 @@ z2
 cModel Technology
 Z0 d/home/jstine/ecen4233/HSCA_S24/SV/sample
 T_opt
-!s110 1702874951
-V^YaRIoU1Hf?gNV_?djc5b0
+!s110 1703011831
+V2lj0;7A1^nNZ38_YS3F>d0
 04 8 4 work stimulus fast 0
-=1-b07b25d4a6a8-657fcf47-4583f-119c5
+=1-b07b25d4a6a8-6581e5f7-1825f-178bd
 !s124 OEM100
 o-quiet -auto_acc_if_foreign -work work +acc
 Z1 tCvgOpt 0
@@ -22,49 +22,49 @@ n@_opt
 OL;O;2021.3_1;73
 vsample
 Z2 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z3 !s110 1702874950
+Z3 !s110 1703011830
 !i10b 1
 !s100 3A6fC;P>SaS7O]O?dPl7@2
 I=jZPkfe582U9Wfkeb`]OK0
 S1
 R0
-Z4 w1702874715
+w1702874715
 8sample.sv
 Fsample.sv
 !i122 0
 L0 1 5
-Z5 VDg1SIo80bB@j0V0VzS_@n1
-Z6 OL;L;2021.3_1;73
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+Z5 OL;L;2021.3_1;73
 r1
 !s85 0
 31
-Z7 !s108 1702874949.000000
-Z8 !s107 tb_sample.sv|sample.sv|
-Z9 !s90 sample.sv|tb_sample.sv|
+Z6 !s108 1703011830.000000
+Z7 !s107 tb_sample.sv|sample.sv|
+Z8 !s90 sample.sv|tb_sample.sv|
 !i113 0
-Z10 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z9 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R1
 vstimulus
 R2
 R3
 !i10b 1
-!s100 6UVKeXMgnZeKeiR_5DIEW0
-IXJ]71Wi_B35m15@`e@jeK2
+!s100 CeHR6b4>S]CMb5Ai3YU]A0
+IFg0C3Ddh1MN3R?`BiAO7G2
 S1
 R0
-R4
+w1703011820
 8tb_sample.sv
 Ftb_sample.sv
 !i122 0
-L0 2 66
+L0 2 63
+R4
 R5
-R6
 r1
 !s85 0
 31
+R6
 R7
 R8
-R9
 !i113 0
-R10
+R9
 R1

@@ -35,13 +35,15 @@ module stimulus;
 
    initial
      begin
-	for (j=0; j < 16; j=j+1)
+	for (j=0; j < 64; j=j+1)
 	  begin
 	     // Put vectors before beginning of clk
 	     @(posedge clk)
 	       begin
-		  a = $random;
-		  b = $random;
+		  //a = $random;
+		  //b = $random;		  		  
+		  assert(std::randomize(a));
+		  assert(std::randomize(b));		  
 	       end
 	     @(negedge clk)
 	       begin

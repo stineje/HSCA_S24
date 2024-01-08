@@ -1,0 +1,277 @@
+\documentclass[times, twocolumn, 10pt]{article}
+\usepackage{url}
+\usepackage{fancyhdr}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}  
+\usepackage{epsfig}
+\usepackage{lastpage}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{epstopdf}
+\usepackage{fancyvrb}
+
+\usepackage{geometry}
+\geometry{letterpaper, left=1in, right=1in, top=1in, bottom=1in}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\rfoot{\thepage/\pageref{LastPage}}
+%\lhead{OSU ECEN 4233 - High-Speed Computer Arithmetic - Spring 2021}
+\lfoot{\LaTeX}
+
+\begin{document}
+
+\title{Representation of Numbers and their Algorithms}
+\author{James E. Stine \\
+Electrical and Computer Engineering Department\\
+Oklahoma State University \\
+Stillwater, OK 74078, USA}
+\date{}
+
+\maketitle
+%\thispagestyle{plain}\pagestyle{plain}
+\begin{enumerate}
+\item Algorithms are well-defined computational procedures that takes
+  some values as input and produces some value or set of values as an
+  output.
+\item An algorithm is said to be correct for every instance (input),
+  if it halts or stops with the correct output.
+  \begin{itemize}
+  \item Reference: Cormen, Leiserson, Rivest, Stein,
+    \underline{Introduction to Algorithms}, MIT Press
+  \end{itemize}
+\item Analyzing an algorithm has come to mean predicting the resource
+  that the algorithm requires.
+  \begin{itemize}
+  \item Running times of an algorithm on a particular input is the
+    number of primitive operations or steps executed and is useful so
+    that is is machine or hardware independent as possible.
+  \end{itemize}
+\item Order of growth of an algorithm gives a simple characteristic of
+  the algorithm's efficiency and also allows us to compare the
+  relative performance of alternative algorithms.
+  \begin{itemize}
+  \item Studying the asymptotic efficiency of algorithms is determining
+    how running time of an algorithm increases with size of an input in
+    the limit as the size of the input increases without bound
+  \end{itemize}
+\item Big O notation
+  \begin{itemize}
+  \item $\Omega(f)$ function that grows at least as fast as $f$
+  \item $\Theta(f)$ function that grows at the same rate as $f$
+  \item $O(f)$ function that grows no faster than $f$
+  \end{itemize}
+\item Most computer systems represent numbers using strings of binary 
+  digits. 
+  \begin{itemize}
+  \item Numbers often utilize weighted number systems where a set of
+    weights are are used to represent a specific position.
+    \begin{eqnarray*}
+      x  & = & \sum_{i=0}^{n-1} x_i \cdot w_i
+    \end{eqnarray*}
+    where the weight vector is the following
+    \begin{eqnarray*}
+      W  & = & (w_{n-1}, \ldots, w_0)
+    \end{eqnarray*}
+    and the radix (r) is used within the weight.
+    \begin{eqnarray*}
+      R  & = & (r_{n-1}, \ldots, r_0)
+    \end{eqnarray*}
+    such that 
+    \begin{eqnarray*}
+      w_i = r ^ {i}
+    \end{eqnarray*}
+  \item Weighted number systems are typically cannonical, such that:
+    \begin{eqnarray*}
+      D_i = {0, 1, 2, \ldots, \mid r_i \mid - 1}
+    \end{eqnarray*}
+  \item Conventional number systems utilized a fixed radix positive
+    and a canonical digit set.
+  \end{itemize}
+\item In fixed point number systems, the position of the radix point is
+  constant. 
+\item The two most common fixed point representations are integer
+  and fractional. Integer representations are commonly used on 
+  general purpose computers, whereas, digital signal processors
+  typically use both integer and fractional representations. 
+\item  For example, $n$-bit integers have the form:
+  \[ A = a_{n-1} a_{n-2} \ldots a_{1} a_{0}. \]
+  The most significant bit $a_{n-1}$ is referred to as 
+  the {\it sign} bit. If the sign bit is one, the number 
+  is negative. Otherwise, it is positive. 
+\item Similarly, $n$-bit fractional numbers have the form:
+  \[ A = a_{n-1}. a_{n-2} \ldots a_{1} a_{0} \]
+\item Fixed Point Binary Integer
+  \begin{enumerate}
+  \item A $n$-bit conventional fixed-point binary integer has the
+    following form:
+    \begin{eqnarray*}
+      A = \sum_{i=0}^{n-1} a_{i} \cdot 2^{i} 
+    \end{eqnarray*}
+  \item Most-significant bit (MSB) is the bit to the furthermost left of
+    the number.
+  \item Least-significant bit (LSB) is the bit to the furthermost right
+    of the number.
+  \item Unit in the least-signifcant place (ulp) is $r^{-m}$ where $m$
+    is the number of digits in the fractional part and $n$ is the number
+    of digits in the integer part.
+  \end{enumerate}
+\item Representation of Negative Numbers
+  \begin{itemize}
+  \item Sign/Magnitude System
+    \begin{itemize}
+    \item $a_{n-1}=1$ The number is not positive
+    \item $a_{n-1}=0$ The number is not negative
+    \end{itemize}
+  \item Complement Representation
+    \begin{itemize}
+    \item Radix Complement (e.g. two's complement)
+    \item Diminished-radix Complement (e.g. one's complement)
+    \end{itemize}
+\end{itemize}
+\item 2's complement numbers
+  \begin{enumerate}
+  \item The value of an $n$-bit 2's complement binary integer is: 
+    \[ A = -a_{n-1}2^{n-1} + \sum_{i=0}^{n-2} a_{i} \cdot 2^{i} \]
+    For example, with $n = 4$ and $A = 1011.$
+    \begin{eqnarray*}
+      A  & = & -1 \cdot 2^{3} + 1 \cdot 2^{1} + 1 \cdot 2^{0} \\
+      & = & -8 + 2+ 1 \\
+      & = & -5
+    \end{eqnarray*}
+  \item The value of an $n$-bit 2's complement binary fraction is:
+    \[ A = -a_{n-1} + \sum_{i=0}^{n-2} a_{i} \cdot 2^{i - n + 1} \]
+    For example, with $n = 4$ and $A = 1.011$
+    \begin{eqnarray*}
+      A  & = & -1 + 0 \cdot 2^{-1} + 1 \cdot 2^{-2} + 1 \cdot 2^{-3} \\
+      & = & -1 + 1/4 + 1/8 \\
+      & = & -5/8
+    \end{eqnarray*}
+  \item You can also get the value an $n$-bit binary fraction 
+    by computing the value of the $n$-bit binary integer and
+    dividing by $2^{n-1}$. 
+  \item To negate 2's complement numbers, invert all bits and 
+    add a unit in the least position or ulp to the least significant
+    bit. For example, 
+    \begin{eqnarray*}
+      3/8           & = & 0.011 \\
+      invert        &   & 1.100 \\
+      increment     & + & 0.001 \\
+      & = & 1.101 = -3/8 
+      % Check:     invert     &   & 0.010 \\
+      % 	   increment    & + & 0.001 \\
+      %           3/8         &   & 0.011 = 3/8
+    \end{eqnarray*}
+  \end{enumerate}
+
+\item Sign-magnitude numbers
+  \begin{enumerate}
+  \item The value of a sign-magnitude binary fraction is:
+    \[ A = (1 - 2 \cdot a_{n-1}) \cdot \sum_{i=0}^{n-2} a_{i} \cdot 2^{i - n + 1} \]
+    For example, with $n = 4$ and $A = 1.011$
+    \begin{eqnarray*}
+      A  & = & (1 - 2 \cdot 1) \cdot (0 \cdot  2^{-1} + 1 \cdot 2^{-2} + 1 \cdot 2^{-3}) \\
+      & = & -1 \cdot (1/4 + 1/8) \\
+      & = & -3/8
+    \end{eqnarray*}
+  \item To negate sign-magnitude numbers, invert the sign bit (i.e., the most significant bit).
+    For example, 
+    \begin{eqnarray*}
+      3/8           & = & 0.011 \\
+      invert\_sign   & = & 1.011 = -3/8 
+      % Check:    invert\_sign   & = & 0.011 = 3/8 \\
+    \end{eqnarray*}
+  \end{enumerate}
+
+\item 1's complement numbers
+  \begin{enumerate}
+  \item The value of a 1's complement binary fraction is:
+    \[ A = \sum_{i=0}^{n-2} (a_{i} - a_{n-1}) \cdot 2^{i - n + 1} \]
+    For example, with $n = 4$ and $A = 1.011$
+    \begin{eqnarray*}
+      A  & = & (0 - 1) \cdot 2^{-1} + (1 - 1) \cdot 2^{-2} + (1 - 1) \cdot 2^{-3}\\
+      & = & -1/2 
+    \end{eqnarray*}
+  \item To negate 1's complement numbers, invert all bits. For example, 
+    \begin{eqnarray*}
+      3/8           & = & 0.011 \\
+      invert        &   & 1.100 = -3/8 \\
+      % Check:    invert        &   & 0.011 = 3/8
+    \end{eqnarray*}
+  \end{enumerate}
+
+\item Characteristics of Fixed Point Number Systems (See Table 1). 
+  \begin{enumerate}
+  \item Positive numbers are identical for all three number systems. 
+  \item The sign-magnitude and 1's complement number systems have both $+0$ and $-0$. 
+  \item Only the 2's complement number system has a representation for $-1$. 
+  \end{enumerate}
+
+\item Uses of Fixed Point Number Systems
+  \begin{enumerate}
+  \item The 2's complement number system is the most common format 
+    for fixed-point numbers (all operations are fairly easy)
+  \item The sign-magnitude number system is the most common format for 
+    floating-point numbers (lets sign be handled separately and
+    provides both +0 and -0)
+  \item The 1's complement number system is not frequently used
+  \end{enumerate}
+
+\item Behavior under truncation
+  \begin{enumerate}
+  \item 2's complement number truncate toward $ -\infty $. The number either
+    decreases in value or stays the same. For example,  
+    \begin{eqnarray*}
+      0.011 & = & 3/8 \\ 
+      0.01  & = & 2/8 = 1/4 \\ 
+      1.011 & = & -5/8 \\ 
+      1.01  & = & -6/8 = -3/4
+    \end{eqnarray*}
+  \item Sign-magnitude numbers truncate toward 0. Positive numbers either
+    decrease in value or stays the same, but negative numbers either
+    increase in value or stay the same. For example,  
+    \begin{eqnarray*}
+      0.011 & = & 3/8 \\ 
+      0.01  & = & 2/8 = 1/4 \\ 
+      1.011 & = & -3/8 \\ 
+      1.01  & = & -2/8 = -1/4
+    \end{eqnarray*}
+  \item 1's complement numbers also truncate toward 0. For example,  
+    \begin{eqnarray*}
+      0.011 & = & 3/8 \\ 
+      0.01  & = & 2/8 = 1/4 \\ 
+      1.011 & = & -1/2 \\ 
+      1.01  & = & -1/2 = -4/8 \\ 
+      1.010 & = & -5/8 \\ 
+      1.01  & = & -1/2 = -4/8 \\ \\
+    \end{eqnarray*}    
+  \end{enumerate}
+\end{enumerate}
+
+\begin{table*} [t!]
+  \centering
+  \begin{tabular}{|c|c|c|c|} \hline
+    Number  & 2's Complement & Sign Magnitude & 1's Complement \\ \hline \hline
+    +7/8   &      0.111     &    0.111       &      0.111      \\ \hline
+    +3/4   &      0.110     &    0.110       &      0.110      \\ \hline
+    +5/8   &      0.101     &    0.101       &      0.101      \\ \hline
+    +1/2   &      0.100     &    0.100       &      0.100      \\ \hline
+    +3/8   &      0.011     &    0.011       &      0.011      \\ \hline
+    +1/4   &      0.010     &    0.010       &      0.010      \\ \hline
+    +1/8   &      0.001     &    0.001       &      0.001      \\ \hline
+    +0     &      0.000     &    0.000       &      0.000      \\ \hline
+    -0     &       N/A      &    1.000       &      1.111      \\ \hline
+    -1/8   &      1.111     &    1.001       &      1.110      \\ \hline
+    -1/4   &      1.110     &    1.010       &      1.101      \\ \hline
+    -3/8   &      1.101     &    1.011       &      1.100      \\ \hline
+    -1/2   &      1.100     &    1.100       &      1.011      \\ \hline
+    -5/8   &      1.011     &    1.101       &      1.010      \\ \hline
+    -3/4   &      1.010     &    1.110       &      1.001      \\ \hline
+    -7/8   &      1.001     &    1.111       &      1.000      \\ \hline
+    -1     &      1.000     &     N/A        &       N/A       \\ \hline
+  \end{tabular}
+  \caption{$4$-bit Fixed Point Fractions}
+\end{table*}
+
+\end{document}

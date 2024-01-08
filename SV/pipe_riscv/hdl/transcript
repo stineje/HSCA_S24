@@ -17,7 +17,7 @@
 # ** Warning: (vlib-34) Library already exists at "work".
 # Errors: 0, Warnings: 1
 # QuestaSim-64 vlog 2021.3_1 Compiler 2021.08 Aug 15 2021
-# Start time: 14:42:37 on Nov 28,2023
+# Start time: 14:17:35 on Jan 06,2024
 # vlog -reportprogress 300 riscv_pipelined.sv 
 # -- Compiling module testbench
 # -- Compiling module top
@@ -42,10 +42,10 @@
 # 
 # Top level modules:
 # 	testbench
-# End time: 14:42:37 on Nov 28,2023, Elapsed time: 0:00:00
+# End time: 14:17:35 on Jan 06,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -debugdb -voptargs="+acc" work.testbench 
-# Start time: 14:42:37 on Nov 28,2023
+# Start time: 14:17:35 on Jan 06,2024
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Note: (vsim-8611) Generating debug db.
 # ** Note: (vopt-4301) Memory core inferred for signal 'RAM' width=32, depth=256, type=RAM at location riscv_pipelined.sv:537
@@ -78,7 +78,5 @@
 # ** Note: $stop    : riscv_pipelined.sv(120)
 #    Time: 265 ns  Iteration: 1  Instance: /testbench
 # Break in Module testbench at riscv_pipelined.sv line 120
-run 20ns
-run 20ns
-# End time: 14:50:38 on Nov 28,2023, Elapsed time: 0:08:01
+# End time: 14:37:23 on Jan 06,2024, Elapsed time: 0:19:48
 # Errors: 0, Warnings: 0

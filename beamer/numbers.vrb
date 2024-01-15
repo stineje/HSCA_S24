@@ -1,0 +1,11 @@
+\frametitle{Summary}
+\begin{itemize}
+\item A repeatable batch-based LVS design flow has been introduced.
+\item Many Mentor Graphics Calibre tools are utilized to help figure
+  out any errors with layout.
+\item Other helpful scripts to read in and out gds files as well as
+  other small scripts have been introduced.
+\item All scripts and this presentation are
+  at \verb+/import/vlsi4/IBM_PDK/cmos32soi/LVS_Stream+
+\item Any feedback is welcome to this process.
+\end{itemize}

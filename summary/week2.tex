@@ -1,0 +1,496 @@
+\documentclass[times, twocolumn, 10pt]{article}
+\usepackage{url}
+\usepackage{fancyhdr}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}  
+\usepackage{epsfig}
+\usepackage{lastpage}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{epstopdf}
+\usepackage{fancyvrb}
+
+\usepackage{geometry}
+\geometry{letterpaper, left=1in, right=1in, top=1in, bottom=1in}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\rfoot{\thepage/\pageref{LastPage}}
+%\lhead{OSU ECEN 4233 - High-Speed Computer Arithmetic - Spring 2021}
+\lfoot{\LaTeX}
+
+\begin{document}
+
+\title{Basic Adder Structures and the Lookahead Concept}
+\author{James E. Stine \\
+  Electrical and Computer Engineering Department\\
+  Oklahoma State University \\
+  Stillwater, OK 74078, USA}
+\date{}
+
+\maketitle
+%\thispagestyle{plain}\pagestyle{plain}
+\begin{enumerate}
+\item Binary Addition and Subtraction Operations
+  \begin{enumerate}
+  \item In fixed point number systems, the simplest arithmetic operations 
+    are addition and subtraction. 
+  \item To compute the sum of two 2's complement numbers ($S = A + B$),
+    add the corresponding bits of both numbers. For example, 
+    \begin{eqnarray*}
+      A  & = & 0.1011 = 11/16 \\
+      + B  & = & 0.0011 =  3/16 \\
+      = S  & = & 0.1110 = 14/16 
+    \end{eqnarray*}
+    and 
+    \begin{eqnarray*}
+      A  & = & 0.1001 =  9/16 \\
+      + B  & = & 1.0100 =  -12/16 \\
+      = S  & = & 1.1101 = -3/16 
+    \end{eqnarray*}
+  \item To compute the difference of two 2's complement numbers ($S = A - B$),
+    add the bits of the minuend $A$ to the 2's complement of the subtrahend
+    $B$. For example, 
+    \begin{eqnarray*}
+      A  & = & 0.1011 = 11/16 \\
+      - B  & = & 0.0011 =  3/16 
+    \end{eqnarray*}
+    becomes 
+    \begin{eqnarray*}
+      A  & = & 0.1011 =  11/16 \\
+      +(-B) & = & 1.1101 =  -3/16 \\
+      = S  & = & 0.1000 = 8/16
+    \end{eqnarray*}
+  \end{enumerate}
+\item Half Adders 
+  \begin{enumerate}
+  \item A fundamental building block in arithmetic systems is the half
+    adder (HA). 
+  \item A HA takes two bits $a_{k}$ and $b_{k}$ and produces a sum bit
+    $s_{k}$ and
+    a carry bit $c_{k+1}$. 
+    \begin{table} [h]
+      \centering
+      \label{ha.tbl}
+      \begin{tabular}{|c|c||c|c|} \hline
+	$a_{k}$ & $b_{k}$ & $c_{k+1}$ & $s_{k}$  \\ \hline \hline
+        0    &    0    &    0       &   0      \\ \hline
+        0    &    1    &    0       &   1      \\ \hline
+        1    &    0    &    0       &   1      \\ \hline
+        1    &    1    &    1       &   0      \\ \hline
+      \end{tabular}
+      \caption{HA Truth Table}
+    \end{table}
+  \item The logic equations for a HA are:
+    \begin{eqnarray*}
+      s_{k}  & = & \overline{a_{k}} \cdot b_{k} + a_{k} \cdot \overline{b_{k}} \\
+      & = & a_{k} \oplus b_{k} \\
+      c_{k+1}  & = &  a_{k} \cdot b_{k} 
+    \end{eqnarray*}
+  \item One possible logic implementation of the HA is shown in
+    Figure~\ref{ha.fig}
+    This HA requires 4 logic gates and has the following delays: 
+    \begin{eqnarray*}
+      a_{k}, b_{k} \rightarrow s_{k} & = & 3 \bigtriangleup \\
+      a_{k}, b_{k} \rightarrow c_{k+1} & = & 1 \bigtriangleup
+    \end{eqnarray*}
+    where $\bigtriangleup$ represents a single gate delay.  
+    \begin{figure*}
+      \label{ha.fig}
+      \begin{center}
+	\setlength{\unitlength}{0.0105in}%
+	\epsfig{figure=ha.eps,height=1.0in}
+      \end{center}
+      \caption{HA Implementation.}
+    \end{figure*}
+  \item Full Adders
+    \begin{enumerate}
+    \item A second building block in arithmetic systems is the full
+      adder (FA). 
+    \item A FA takes three bits $a_{k}$, $b_{k}$, and $c_{k}$ and
+      produces a sum 
+      bit $s_{k}$ and a carry bit $c_{k+1}$. 
+    \item The truth table for a FA is:
+      \begin{table} [h]
+	\centering
+	\label{fa.tbl}
+	\begin{tabular}{|c|c|c||c|c|} \hline
+	  $a_{k}$ & $b_{k}$ & $c_{k}$ & $c_{k+1}$ & $s_{k}$  \\ \hline \hline
+          0    &    0     &   0     &   0       &   0      \\ \hline
+          0    &    0     &   1     &   0       &   1      \\ \hline
+          0    &    1     &   0     &   0       &   1      \\ \hline
+          0    &    1     &   1     &   1       &   0      \\ \hline
+          1    &    0     &   0     &   0       &   1      \\ \hline
+          1    &    0     &   1     &   1       &   0      \\ \hline
+          1    &    1     &   0     &   1       &   0      \\ \hline
+          1    &    1     &   1     &   1       &   1      \\ \hline
+	\end{tabular}
+	\caption{FA Truth Table}
+      \end{table}
+    \item The logic equations for a FA are:
+      \begin{eqnarray*}
+	s_{k}  & = & \overline{a_{k}} \cdot \overline{b_{k}} \cdot c_{k} + \
+	\overline{a_{k}} \cdot b_{k} \cdot \overline{c_{k}} + \\
+	& & a_{k} \cdot \overline{b_{k}} \cdot \overline{c_{k}} + \
+	a_{k} \cdot b_{k} \cdot c_{k} \\
+	& = & a_{k} \oplus b_{k} \oplus c_{k} \\
+	c_{k+1}  & = &  \overline{a_{k}} \cdot b_{k} \cdot c_{k} + \
+	a_{k} \cdot \overline{b_{k}} \cdot c_{k} + \\
+	& & a_{k} \cdot b_{k} \cdot \overline{c_{k}} + \
+	a_{k} \cdot b_{k} \cdot c_{k} \\
+	& = &  a_{k} \cdot b_{k} +  a_{k} \cdot c_{k} +  b_{k} \cdot c_{k} 
+      \end{eqnarray*}
+    \item A FA can be constructed from two HAs and one OR gate, as
+      shown in Figure~\ref{fa.fig}.
+      This FA requires 9 logic gates and has the following delays: 
+      \begin{eqnarray*}
+	a_{k}, b_{k} \rightarrow s_{k} = 6 \bigtriangleup \\
+	a_{k}, b_{k} \rightarrow c_{k+1} = 5 \bigtriangleup \\
+	c_{k} \rightarrow s_{k} = 3 \bigtriangleup \\
+	c_{k} \rightarrow c_{k+1} = 2 \bigtriangleup \\
+      \end{eqnarray*}
+      \begin{figure*}
+	\label{fa.fig}
+	\begin{center}
+	  \setlength{\unitlength}{0.0105in}%
+	  \epsfig{figure=fa.eps, height=1.25in}
+	\end{center}
+	\caption{FA Implementation.}
+      \end{figure*}
+    \item Ripple Carry Adders
+      \begin{enumerate}
+      \item Ripple carry adders (RCA) provides a slow, but hardware
+        efficient, method for adding 
+	two binary numbers. 
+      \item An $n$-bit RCA is formed by concatenating $n$ FAs. 
+      \item The carry out from the $k^{th}$ FA is used as the carry in of 
+	the $(k + 1)^{th}$ FA, as shown in Figure~\ref{rca.fig}. 
+	\begin{figure*}
+	  \label{rca.fig}
+	  \begin{center}
+	    \setlength{\unitlength}{0.0105in}%
+	    \epsfig{figure=rca.eps, height=1.25in}
+	  \end{center}
+	  \caption{RCA Implementation.}
+	\end{figure*}
+      \item Since an $n$-bit RCA requires $n$ FAs and each FA has nine gates, 
+	the total number of gates for the $n$-bit RCA is $9n$. The worst case 
+	delays for a ripple carry adder are:
+	\begin{eqnarray*}
+	  a_{0}, b_{0} \rightarrow s_{n-1} = (2n + 4) \bigtriangleup \\
+	  a_{0}, b_{0} \rightarrow c_{n} = (2n + 3) \bigtriangleup
+	\end{eqnarray*}
+      \end{enumerate}
+    \item Ripple Carry Adders/Subtracters
+      \begin{enumerate}
+      \item To perform subtraction, it is necessary to complement each
+        of the bits
+	of $B$ and add a one to the least significant bit. This is accomplished
+	by adding a row of $n$ XOR gates to form a ripple-carry
+        adder/subtractor (RCSA), 
+	as shown in Figure~\ref{rcas.fig}. 
+	\begin{figure*} [t!]
+	  \label{rcas.fig}
+	  \begin{center}
+	    \setlength{\unitlength}{0.0105in}%
+	    \epsfig{figure=rcas.eps, height=1.75in}
+	  \end{center}
+	  \caption{RCAS Implementation.}
+	\end{figure*}
+      \item To perform subtraction, {\it sub} is set to one, which
+        complements the bits 
+	of $B$ and sets $c_{0}$ to one. To perform addition, {\it sub}
+        is set to 
+	zero, which leaves the bits of $B$ unchanged and sets $c_{0}$ to zero. 
+      \item If an XOR gate is equivalent to 4 simple gates, and has a
+        delay of $3 \bigtriangleup$,
+	the RSCA requires $13n$ gates and has the following worst case delays: 
+	\begin{eqnarray*}
+	  b_{0} \rightarrow s_{n-1} & = & (2n + 7) \bigtriangleup \\
+	  b_{0} \rightarrow c_{n} & = & (2n + 6) \bigtriangleup
+	\end{eqnarray*}
+      \end{enumerate}
+    \item Overflow Detection
+      \begin{enumerate}
+      \item Overflow occurs when you compute an operation with two valid
+        representations and the result cannot be represented for the
+        given
+        representation because the value is too large or too small.
+      \item Specific detection of overflow requires knowing which
+        operation is being performed and its given representation
+        (e.g., two's complement).
+        \item For an unsigned number representation, a simple way
+          of detecting overflow is add two numbers and check whether
+          the result is larger than the largest posible value (e.g.,
+          for an $n$-bit integer this would be $2^n-1$).  This is
+          because it would take $n+1$ bits to represent the result
+          correctly.  
+          \item If $A + B$ or $ A - B$ is greater than or equal to +1, or
+            less than $-1$,
+	    overflow occurs and the computed sum or difference is
+            incorrect. For example, 
+	    \begin{eqnarray*}
+	      A  & = & 0.1001 =  9/16 \\
+	      + B  & = & 0.1100 =  12/16 \\
+	      = S  & = & 1.0101 =  -13/16 
+	    \end{eqnarray*}
+	    is an incorrect result
+          \item One way to detect overflow is to check the result
+            of the sum. However,
+            this can be complicated because as the input operand grows,
+            it requires the result before it can determine an
+            overflow, which is computationally complex.
+          \item A simple method to detect overflow by comparing the
+            the carry into the
+            most significant bit
+	    to the carry out of the most significant bit. If these two
+            bits differ, 
+	    then overflow has occurred. This can be expressed as:
+	    \[  OV = c_{n-1} \oplus c_{n} \] 
+	    For example, in the previous computation of 
+            $A =  9/16$ added to $B = 12/16$:
+	    \begin{eqnarray*}
+	      c_{n-1} & = & 1 \\
+	      c_{n}   & = & 0 \\
+	      OV      & = & 1 \oplus 0 = 1 
+	    \end{eqnarray*}
+	    and overflow is detected. 
+      \end{enumerate}
+    \end{enumerate}
+  \end{enumerate}
+  \begin{enumerate}
+    % CLA Concept
+  \item Carry Lookahead Concept. 
+    \begin{enumerate}
+    \item A carry lookahead adder uses specialized logic to compute 
+      the carries in parallel. 
+    \item A full adder generates a carry if both $a_{k}$ and $b_{k}$
+      are one. 
+      \begin{eqnarray*}
+	g_{k} = a_{k} \cdot b_{k}      
+      \end{eqnarray*}
+    \item A full adder propagates a carry if either $a_{k}$ or
+      $b_{k}$ is one. 
+      \begin{eqnarray}
+	p_{k} = a_{k} + b_{k}      
+      \end{eqnarray}
+    \item For example, when adding the numbers 
+      \begin{eqnarray*}
+        A  & = & 0.1010 \\
+        + B  & = & 0.0011
+      \end{eqnarray*}
+      carries are generated in position 1 and propagated in positions
+      0 and 3. 
+    \end{enumerate}
+  \item Carry Lookahead Equations. 
+    \begin{enumerate}
+    \item A carry enters position $k+1$ if a carry is generated in 
+      position $k$ or a carry enters position $k$ and is propagated. 
+      \begin{eqnarray*}
+	c_{k+1} = g_{k} + p_{k} \cdot c_{k} 
+      \end{eqnarray*}
+    \item Solving this equation recursively gives:
+      \begin{eqnarray*}
+	c_{k+2} & = & g_{k+1} + p_{k+1} \cdot c_{k+1} \\
+	& = & g_{k+1} + p_{k+1} \cdot (g_{k} + p_{k}
+	\cdot c_{k}) \\
+	& = & g_{k+1} + p_{k+1} \cdot g_{k} + p_{k+1}
+	\cdot p_{k} \cdot c_{k}
+      \end{eqnarray*}
+    \item Extending this to one more position gives:
+      \begin{eqnarray*}
+	c_{k+3} & = & g_{k+2} + p_{k+2} \cdot c_{k+2} \\
+	& = & g_{k+2} + p_{k+2} \cdot \\
+        & & (g_{k+1} + p_{k+1} \cdot g_{k} + \
+	p_{k+1} \cdot p_{k} \cdot c_{k}) \\
+	& = & g_{k+2} + p_{k+2} \cdot g_{k+1} + \\
+        & & p_{k+2} \cdot p_{k+1} \cdot g_{k} + \\
+        & & p_{k+2} \cdot p_{k+1} \cdot p_{k} \cdot c_{k} 
+      \end{eqnarray*}
+    \end{enumerate}
+  \item Generalized Carry Lookahead Equations. 
+    \begin{enumerate}
+    \item The equation for the carry into position $k+r$ is:
+      \begin{eqnarray*}
+	c_{k+r} & = & \left(\sum_{i=k}^{k+r-1} g_{i}
+	\prod_{j=i+1}^{k+r-1}p_{j}\right) \
+	+ c_{k} \prod_{j=k}^{k+r-1}p_{j} 
+      \end{eqnarray*}
+    \item Implementing this equation requires $r+1$ gates, which
+      have a maximum 
+      fan-in of $r+1$. 
+    \item To produce all the carries from $c_{k+1}$ to $c_{k+r}$ a total of 
+      \begin{eqnarray*}
+	\sum_{i=1}^{r} (i + 1) = \frac{(r + 3) \cdot r}{2}
+      \end{eqnarray*}
+      gates are required.
+    \end{enumerate}
+  \item Modification of the original 9 gate FA. 
+    \begin{enumerate}
+    \item The 9 gate full adder already has a the required logic
+      to produce $g_{k}$ and $p_{k}$. 
+    \item In addition, the OR gate used to produce $c_{k+1}$ is no
+      longer required. 
+    \item Consequently, we can use a reduced full adder (RFA) that
+      requires only 8 logic gates. 
+    \item The generate and propagate signals are ready after 
+      $1 \bigtriangleup$
+    \end{enumerate}
+  \item A $4$-bit CLA. 
+    \begin{enumerate}
+    \item For $k=0$ we have:
+      \begin{eqnarray*}
+	c_{1} & = & g_{0} + p_{0} \cdot c_{0} \\
+	c_{2} & = & g_{1} + p_{1} \cdot g_{1} + p_{1} \cdot p_{0}
+	\cdot c_{0} \\
+	c_{3} & = & g_{2} + p_{2} \cdot g_{1} + p_{2} \cdot p_{1}
+	\cdot g_{0} + \\
+        & & p_{2} \cdot p_{1} \cdot p_{0} \cdot c_{0} 
+      \end{eqnarray*}
+      The logic used to produce the carries is typically
+      referred to as a carry lookahead generator (CLG). 
+    \item Draw figure of a 4-bit CLA. 
+    \item A 4-bit CLG uses 9 gates and has two gate delays. 
+      However, some of these gates have more than two inputs.
+    \item Since a 4-bit CLA uses 4 RFAs, and a 4-bit CLG (9 gates), it has 
+      a total of $4 \cdot 8 + 9 = 41$ gates. 
+    \item The worst case delay for a 4-bit CLA is:
+      \begin{eqnarray*}
+	a_{k}, b_{k} \rightarrow s_{3} & = & 6 \bigtriangleup \\
+	a_{k}, b_{k} \rightarrow c_{4} & = & 5 \bigtriangleup \\
+      \end{eqnarray*}
+    \end{enumerate}
+  \item Block Carry Lookahead Generators
+    \begin{enumerate}
+    \item Each additional position, increases the fan-in of the logic gates. 
+      Most technologies have a maximum fan-in of four. Therefore, to continue 
+      the process, it is necessary to define generate and propagate signals 
+      over four bit blocks. 
+      \begin{eqnarray*}
+	g_{k+3:k} & = & g_{k+3} + p_{k+3} \cdot g_{k+2} + \\
+        & & p_{k+3} \cdot p_{k+2} \cdot g_{k+1} + \\
+	& & p_{k+3} \cdot p_{k+2} \cdot p_{k+1} \cdot g_{k} \\
+	p_{k+3:k} & = & p_{k+3} \cdot p_{k+2} \cdot p_{k+1} \cdot p_{k} 
+      \end{eqnarray*}
+    \item A four bit block carry lookahead generator (BCLG) has
+      14 gates, and a maximum delay of $2 \bigtriangleup$. 
+    \item In terms of the four bit block generate and propagate
+      signals, the next carry can be expressed as 
+      \begin{eqnarray*}
+	c_{k+4} & = & g_{k+3:k} + p_{k+3:k} \cdot c_{k}
+      \end{eqnarray*}
+    \item A $4-bit$ CLA with block generate and propagate signals requires 
+      46 gates. 
+    \end{enumerate}
+  \item Larger Carry Lookahead Adders
+    \begin{enumerate}
+    \item Draw 16-bit CLA. 
+    \item A $16$-bit CLA requires $16$ RFAs ($8$ gates each) and
+      $5$ CLA blocks ($14$ gates each). Therefore, it 
+      requires a total of $16 \cdot 8 + 5 \cdot 14 = 198$ 
+      gates.
+    \item The delays through the 16-bit CLA are:
+      \begin{eqnarray*}
+	a_{k}, b_{k} \rightarrow p_{k}, g_{k} = 1 \bigtriangleup \\
+	p_{k}, g_{k} \rightarrow g_{k+3:k} = 2 \bigtriangleup \\
+	g_{k+3:k} \rightarrow c_{k+4} = 2 \bigtriangleup \\
+	c_{k+4} \rightarrow c_{k+7} = 2 \bigtriangleup \\
+	c_{k+7} \rightarrow s_{k+7} = 3 \bigtriangleup \\
+	a_{k}, b_{k} \rightarrow c_{k+7} = 10 \bigtriangleup \\
+      \end{eqnarray*}
+    \end{enumerate}
+  \item CLA Gate Counts 
+    \begin{enumerate}
+    \item An $n$-bit CLA with a maximum fan-in of $r$, requires 
+      \begin{displaymath}
+	\sum_{l=1}^{log_{r}(n)} \frac{n}{r^{l}} \approx \lceil
+	\frac{n-1}{r-1} \rceil 
+      \end{displaymath}
+      carry lookahead blocks and $n$ RFAs. 
+    \item An $r$-bit carry lookahead block requires $\frac{(3 + r)r}{2}$
+      gates and each RFA requires $8$ gates. 
+    \item Thus, the total number of gates for an $n$-bit CLA is 
+      \begin{displaymath}
+        8n + \frac{(3 + r)r}{2} \cdot \lceil \frac{n-1}{r-1} \rceil
+      \end{displaymath}
+    \item When $r = 4$, this gives
+      \begin{displaymath}
+        8n + 14 \cdot \lceil \frac{n-1}{3} \rceil \approx 12.67n - 4.67
+      \end{displaymath}
+    \item When $r = 2$, this gives
+      \begin{displaymath}
+        8n + 5(n - 1) = 13n - 5
+      \end{displaymath}
+    \end{enumerate}
+  \item CLA Delay
+    \begin{enumerate}
+    \item An $n$-bit CLA with a maximum fan-in of $r$, requires
+      $\lceil \log_{r}(n) \rceil$
+      CLA logic levels. 
+    \item An $r$-bit CLA has six gate delays and there are four
+      additional gate 
+      delays per level after the first. 
+    \item Thus, the delay for an $n$-bit CLAs is
+      \begin{displaymath}
+        6 + 4 \cdot (\lceil \log_{r}(n) \rceil - 1) = \
+	2 + 4 \cdot \lceil \log_{r}(n) \rceil
+      \end{displaymath}
+    \end{enumerate}
+  \item Compared to the RCA, the CLA:
+    \begin{enumerate}
+    \item Has a much shorter delay (logarithmic instead of linear).
+    \item Uses a larger number of gates.
+    \item Is less regular in structure. 
+    \end{enumerate}
+  \item Carry Lookahead Adder Block Issues
+    \begin{enumerate}
+    \item Fan-out
+    \item Logic Levels
+    \item Wire Tracks (density)
+    \end{enumerate}
+  \item Quantitative Comparison
+    \begin{table} [ht]
+      \centering
+      \label{cla1.tbl}
+      \begin{tabular}{|r|r|r|r|r|} \hline 
+        Size & CLA      & CLA      & RCA   \\  \hline
+        $n$ &  ($r=4$) & ($r=2$)  &       \\ \hline \hline
+        4  &  46      &  47      & 36    \\ \hline 
+        8  &  92      &  99      & 72    \\ \hline
+        16  &  198     &  203     & 144   \\ \hline 
+        32  &  396     &  411     & 288   \\ \hline 
+        64  &  806     &  827     & 576   \\ \hline 
+        128 &  1,612   &  1,659   & 1,152 \\ \hline
+      \end{tabular}
+      \caption{Area}
+    \end{table}
+    \begin{table} [ht]
+      \centering
+      \label{cla2.tbl}
+      \begin{tabular}{|r|r|r|r|r|} \hline 
+        Size & CLA     &  CLA    & RCA \\ \hline
+        $n$  & ($r=4$) & ($r=2$) &     \\ \hline \hline
+        4   &   6     &  10     &  12 \\ \hline 
+        8   &   10    &  14     &  20 \\ \hline
+        16   &   10    &  18     &  36 \\ \hline 
+        32   &   14    &  22     &  68 \\ \hline 
+        64   &   14    &  26     & 132 \\ \hline 
+        128  &   18    &  30     & 260 \\ \hline   
+      \end{tabular}
+      \caption{Delay}
+    \end{table}
+  \end{enumerate}
+  \begin{figure*}
+    \label{cla16.fig}
+    \begin{center}
+      \setlength{\unitlength}{0.0105in}%
+      \epsfig{figure=cla16.eps, height=6.0in}
+    \end{center}
+    \caption{16-bit Carry Lookahead Adder.}
+  \end{figure*}
+\end{enumerate}
+
+
+
+\end{document}

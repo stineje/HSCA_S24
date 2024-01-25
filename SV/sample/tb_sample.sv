@@ -17,6 +17,7 @@ module stimulus;
    integer 	 y_integer;   
    integer 	 sum; 
 
+   // Instantiate the Device Under Test
    sample dut (a, b, z);
 
    // 1 ns clock
@@ -26,6 +27,7 @@ module stimulus;
 	forever #5 clk = ~clk;
      end
 
+   // Define the output file
    initial
      begin
 	handle3 = $fopen("sample.out");
@@ -33,22 +35,24 @@ module stimulus;
 	errors = 0;		
      end
 
+   // Test vector 
    initial
      begin
+	// Number of tests
 	for (j=0; j < 64; j=j+1)
 	  begin
 	     // Put vectors before beginning of clk
 	     @(posedge clk)
 	       begin
-		  //a = $random;
-		  //b = $random;		  		  
+		  // allows better output of randomized signals
 		  assert(std::randomize(a));
 		  assert(std::randomize(b));		  
 	       end
 	     @(negedge clk)
 	       begin
 		  z_correct = a+b;
-		  vectornum = vectornum + 1;		       
+		  vectornum = vectornum + 1;
+		  // Check if output of DUT is the same as the correct output
 		  if (z_correct != z)
 		    begin
 		       errors = errors + 1;
@@ -61,6 +65,6 @@ module stimulus;
 	  end // for (i=0; i < 16; i=i+1)
 	$display("%d tests completed with %d errors", vectornum, errors);
 	$finish;	
-     end // initial begin   
+     end 
 
 endmodule // stimulus

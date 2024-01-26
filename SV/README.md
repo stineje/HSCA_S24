@@ -8,4 +8,4 @@ This file has sample SystemVerilog files that can help you learn how to simulate
   <li>sample: sample design that showcases how to test vectors in the testbench and output the results to a file.</li>
 </ol>
 <br>
-Disclaimer:  some of these examples are taken from the Digital Design and Computer Architecture: RISC-V Edition by S. Harris and D. Harris.
+Disclaimer:  some of these examples are taken from the Digital Design and Computer Architecture: RISC-V Edition by S. Harris and D. Harris, Elsevier Publishers, 2021.

@@ -1,4 +1,4 @@
-This file has sample SystemVerilog files that can help you learn how to simulate designs.  All designs have testbenches and DO files in their directories.  These files are not perfect but can be used to clone to help a user quickly get their simulation going.  The following directories are included:
+This file has sample SystemVerilog files that can help you learn how to simulate designs.  This subdirectory has the examples from the DDCA book; however, no ModelSim files are given within this subdirectory.  All example designs have testbenches and DO files in their directories.  These files are not perfect but can be used to clone to help a user quickly get their simulation going.  The following directories are included:
 
 <ol>
   <li>silly: simple Silly example found in DDCA</li>

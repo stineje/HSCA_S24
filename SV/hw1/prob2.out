@@ -1,0 +1,16 @@
+0000 || result (segments): 1111110 | expected (segments): 1111110
+0001 || result (segments): 0110000 | expected (segments): 0110000
+0010 || result (segments): 1101101 | expected (segments): 1101101
+0011 || result (segments): 1111001 | expected (segments): 1111001
+0100 || result (segments): 0110011 | expected (segments): 0110011
+0101 || result (segments): 1011011 | expected (segments): 1011011
+0110 || result (segments): 1011111 | expected (segments): 1011111
+0111 || result (segments): 1110000 | expected (segments): 1110000
+1000 || result (segments): 1111111 | expected (segments): 1111111
+1001 || result (segments): 1111011 | expected (segments): 1111011
+1010 || result (segments): 1110111 | expected (segments): 1110111
+1011 || result (segments): 0011111 | expected (segments): 0011111
+1100 || result (segments): 0001101 | expected (segments): 0001101
+1101 || result (segments): 0111101 | expected (segments): 0111101
+1110 || result (segments): 1001111 | expected (segments): 1001111
+1111 || result (segments): 1000111 | expected (segments): 1000111

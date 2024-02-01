@@ -1,16 +1,16 @@
 # do fulladder.do
 # QuestaSim-64 vlog 2021.3_1 Compiler 2021.08 Aug 15 2021
-# Start time: 02:16:06 on Jan 01,2024
+# Start time: 17:06:40 on Jan 30,2024
 # vlog fulladder.sv 
 # -- Compiling module testbench
 # -- Compiling module fulladder
 # 
 # Top level modules:
 # 	testbench
-# End time: 02:16:06 on Jan 01,2024, Elapsed time: 0:00:00
+# End time: 17:06:40 on Jan 30,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vopt 2021.3_1 Compiler 2021.08 Aug 15 2021
-# Start time: 02:16:06 on Jan 01,2024
+# Start time: 17:06:40 on Jan 30,2024
 # vopt "+acc" work.testbench -o workopt 
 # 
 # Top level modules:
@@ -19,14 +19,12 @@
 # Analyzing design...
 # -- Loading module testbench
 # -- Loading module fulladder
-# Incremental compilation check found 1 design-unit (out of 2) may be reused.
-# Optimizing 1 design-unit (inlining 0/2 module instances):
-# -- Optimizing module testbench(fast)
+# Incremental compilation check found no design-units have changed.
 # Optimized design name is workopt
-# End time: 02:16:07 on Jan 01,2024, Elapsed time: 0:00:01
+# End time: 17:06:40 on Jan 30,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim workopt 
-# Start time: 02:16:07 on Jan 01,2024
+# Start time: 17:06:40 on Jan 30,2024
 # //  Questa Sim-64
 # //  Version 2021.3_1 linux_x86_64 Aug 15 2021
 # //
@@ -49,5 +47,5 @@
 #    Time: 95 ns  Iteration: 1  Instance: /testbench
 # Break in Module testbench at fulladder.sv line 51
 # Stopped at fulladder.sv line 51
-# End time: 02:16:09 on Jan 01,2024, Elapsed time: 0:00:02
+# End time: 17:06:45 on Jan 30,2024, Elapsed time: 0:00:05
 # Errors: 0, Warnings: 0

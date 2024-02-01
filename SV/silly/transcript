@@ -1,16 +1,16 @@
 # do silly.do
 # QuestaSim-64 vlog 2021.3_1 Compiler 2021.08 Aug 15 2021
-# Start time: 14:19:01 on Jan 24,2024
+# Start time: 17:22:17 on Jan 30,2024
 # vlog silly.sv silly_tb.sv 
 # -- Compiling module silly
 # -- Compiling module tb
 # 
 # Top level modules:
 # 	tb
-# End time: 14:19:01 on Jan 24,2024, Elapsed time: 0:00:00
+# End time: 17:22:17 on Jan 30,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -voptargs="+acc" work.tb 
-# Start time: 14:19:01 on Jan 24,2024
+# Start time: 17:22:17 on Jan 30,2024
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim-64
 # //  Version 2021.3_1 linux_x86_64 Aug 15 2021
@@ -38,5 +38,5 @@
 # configure wave not supported in batch mode
 # configure wave not supported in batch mode
 # configure wave not supported in batch mode
-# End time: 14:19:03 on Jan 24,2024, Elapsed time: 0:00:02
+# End time: 17:22:20 on Jan 30,2024, Elapsed time: 0:00:03
 # Errors: 0, Warnings: 0

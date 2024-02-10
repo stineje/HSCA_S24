@@ -1,0 +1,302 @@
+\documentclass[times, twocolumn, 10pt]{article}
+\usepackage{url}
+\usepackage{fancyhdr}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}  
+\usepackage{epsfig}
+\usepackage{lastpage}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{epstopdf}
+\usepackage{fancyvrb}
+
+\usepackage{geometry}
+\geometry{letterpaper, left=1in, right=1in, top=1in, bottom=1in}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\rfoot{\thepage/\pageref{LastPage}}
+%\lhead{OSU ECEN 4233 - High-Speed Computer Arithmetic - Spring 2021}
+\lfoot{\LaTeX}
+
+\begin{document}
+
+\title{Carry-Skip and Carry-Select Adders}
+\author{James E. Stine \\
+Electrical and Computer Engineering Department\\
+Oklahoma State University \\
+Stillwater, OK 74078, USA}
+\date{}
+
+\maketitle
+%\thispagestyle{plain}\pagestyle{plain}
+
+\begin{enumerate}
+\item Carry Skip Concept. 
+  \begin{enumerate}
+  \item The carry skip adder (CSKA) divides the operands to be added into $r$ bit 
+    blocks, the average size of which is $n/r$. Within each block, a ripple 
+    carry adder is used to produce the sum bits and a carry out
+    bit for the block. 
+  \item Setting the carry-in signal of a block to zero causes the carry out 
+    to serve as a block generate signal. 
+  \item An $r$ bit AND gate is also used to form the block propagate signal. 
+  \item The block generate and block propagate signals are combined using
+    the standard carry equation to produce the input carry to the next 
+    block. 
+  \end{enumerate}
+\item A 16-bit CSKA adder with 4-bit blocks. 
+  \begin{enumerate}
+  \item Draw picture of the 16-bit CSKA adder with 4-bit blocks. 
+  \item In order to obtain the carry into bit position 8, we use the 
+    equation:
+    \begin{eqnarray*}
+      c_{8} = g_{7:4} + p_{7:4} \cdot c_{4} 
+    \end{eqnarray*}
+    where 
+    \begin{eqnarray*}
+      p_{7:4} = p_{7} \cdot p_{6} \cdot p_{5} \cdot p_{4}
+    \end{eqnarray*}
+  \item The first and the fourth blocks are regular ripple carry adders, 
+    while the second and the third blocks are ripple carry adders, 
+    with three additional gates. 
+  \item This adder requires $16 \cdot 9 = 144$ gates to implement the FAs
+    and $2 \cdot 3 = 6$ gates to implement the carry logic, for a total 
+    of $150$ gates. 
+  \item It is assumed that the carry logic would be $2$ gates, even though
+  this would require a $5$-input AND gate (e.g. $p_7 \cdot p_6 \cdot p_5
+  \cdot p_4 \cdot c_4$).  The equations could easily be changed to handle
+  only $4$-input gates or less, but this would increase the gate count.
+  \item The delay for this adder is $2 \cdot 4 + 3 = 11 \bigtriangleup$ to 
+    go through the first ripple carry adder $2 \cdot 2 = 4 \bigtriangleup$ to
+    go through the next two blocks, and $2 \cdot 4 + 1 = 9 \bigtriangleup$ 
+    to go through the next last block, for a total delay of $24
+    \bigtriangleup$. 
+  \end{enumerate}
+\item Generalized  CSKA Gate Counts
+  \begin{enumerate}
+  \item An $n$-bit CSKA uses $n$ FAs, each of which requires $9$ gates. 
+  \item It also uses $\lceil n/r \rceil - 2$ sets of carry skip logic, each 
+    of which requires $3$ gates. 
+  \item Thus, the total number of gates used by an $n$-bit CSKA is:
+    \begin{displaymath}
+      9 \cdot n + 2 \cdot (\lceil \frac{n}{r} \rceil - 2)
+    \end{displaymath}
+  \end{enumerate}
+\item Generalized  CSKA Delay
+  \begin{enumerate}
+  \item The first block has a delay of $(2 \cdot r + 3) \bigtriangleup$
+  before the 
+    carry out is ready. 
+  \item The next $(\lceil n/r \rceil - 2)$ blocks have a delay of 
+    $2 \bigtriangleup$  for the carry to skip. 
+  \item The last block has a delay of $2 \cdot r + 1$ from the carry in to the 
+    most significant sum bit. 
+  \item Thus, the total delay is for $s_{n-1}$ is:
+    \begin{eqnarray*}
+      & & (2 \cdot r + 3)  + 2 \cdot (\lceil \frac{n}{r} \rceil - 2) + (2 \cdot
+      r + 1) \\
+      & = & 4 \cdot r + 2 \cdot \lceil \frac{n}{r} \rceil \\
+      & \approx & 4 \cdot r + 2 \cdot \frac{n}{r}
+    \end{eqnarray*}
+  \end{enumerate}
+\item Optimizing the Block Size to Reduce Delay
+  \begin{enumerate}
+  \item The optimum block size is determined by taking the derivative
+    of the delay with respect to $r$, setting it to zero, and 
+    solving for $r$. 
+    \begin{eqnarray*}
+      4 - \frac{2 \cdot n}{r^{2}} & = & 0  \\
+      r & = & \sqrt{n/2} 
+    \end{eqnarray*}
+  \item Plugging this into the delay equation gives 
+    \begin{displaymath}
+      4 \sqrt{n/2} + 2 \cdot \frac{n}{\sqrt{n/2}}  = 4 \sqrt{2 \cdot n}
+    \end{displaymath}
+  \item For example, if $n = 32$, then the delay is minimized by
+    selecting $r = 4$, which gives a worst case delay of 
+    $4 \sqrt{2 \cdot 32} = 32 \bigtriangleup$. 
+  \item For $n = 16$, the delay is minimized by selecting 
+    $r = \sqrt{8} \approx 2.82$. Since r must be an integer, 
+    we can select $r = 3$ for the first five blocks, and use
+    a full adder for the remaining bit. This adder has a worst
+    case delay of $22 \bigtriangleup$ and requires 156 gates. 
+  \end{enumerate}
+\item Variable Length Blocks. 
+  \begin{enumerate}
+  \item The delay of the carry skip adder can be reduced even
+    further by varying the block size. 
+  \item A good strategy is to use smaller blocks on the two ends
+    and larger blocks in the middle. 
+  \item The design of a 16 bit CSKA with block size of $(1, 2, 3, 4, 3, 2, 1)$ 
+    requires 159 gates and has a worst case delay of $19 \bigtriangleup$.
+  \item Speed can also be improved by using faster block adders 
+    (e.g., CLAs) on the ends or using more than one level 
+    of carry skip logic.
+  \end{enumerate}
+\item Characteristics of CSKAs
+  \begin{enumerate}
+  \item In general, CSKAs require slightly more gates than RCAs and fewer
+    gates than CLAs. 
+  \item The delay for CSKAs is less than the delay for RCAs, but 
+    greater than the delay for CLAs. 
+  \item CSKAs are less regular than RCAs and more regular than CLAs. 
+
+    \begin{figure*}
+      \begin{center}
+	\setlength{\unitlength}{0.0105in}%
+	\epsfig{figure=c4skip16.eps, height=2.0in}
+      \end{center}
+      \label{c4skip16.fig}
+      \caption{16-bit Carry Skip Adder (r = 4).}
+    \end{figure*}
+
+    \begin{figure*}
+      \begin{center}
+	\setlength{\unitlength}{0.0105in}%
+	\epsfig{figure=c3skip16.eps, height=1.0in}
+      \end{center}
+      \label{c3skip16.fig}
+      \caption{16-bit Carry Skip Adder (r = 3).}
+    \end{figure*}
+
+    \begin{figure*}
+      \begin{center}
+	\setlength{\unitlength}{0.0105in}%
+	\epsfig{figure=v2skip16.eps, height=1.0in}
+      \end{center}
+      \label{v2skip16.fig}
+      \caption{16-bit Carry Skip Adder with Variable-Size Blocks.}
+    \end{figure*}
+  \end{enumerate}
+
+\item Carry Select Concept. 
+  \begin{enumerate}
+  \item The carry select adder (CSEA) divides the operands to be added into
+  $r$ bit 
+    blocks, the average size of which is $n/r$. 
+  \item For each block, except the first, two $r$-bit ripple carry adders
+  operate
+    in parallel to form $2$ sets of sum bits and carry out signals. One RCA 
+    has an initial carry in of zero and the other has an initial carry 
+    in of one.    
+  \item The block with a carry in of zero provides a block generate signal, and
+    the block with a carry in of one provides a block propagate signal. These
+    two signals are used to generate a carry out signal for the block. 
+  \item The carry out from the previous block controls a multiplexor that
+  selects
+    the appropriate set of sum bits. 
+  \end{enumerate}
+\item Multiplexor Logic. 
+  \begin{enumerate}
+  \item A $2:1$ multiplex, with inputs $x$ and $y$, select bit $t$, and output
+  $z$, can be implemented as
+    \[	z = x \cdot t + y \cdot \overline{t} \]
+    If $t = 1$, $z = x$; otherwise $z = y$. 
+  \item An $r$-bit $2:1$ multiplex requires $3 \cdot r + 1$ gates; $1$ to
+  invert $t$ and $3 \cdot r$ 
+    to implement the AND and OR gates. 
+  \end{enumerate}
+\item A $16$-bit CSEA adder with $4$-bit blocks. 
+  \begin{enumerate}
+  \item Draw picture of the $16$-bit CSEA adder with $4$-bit blocks. 
+  \item In order to obtain the carry into bit position $8$, we use the 
+    equation:
+    \begin{eqnarray*}
+      c_{8} = g_{7:4} + p_{7:4} \cdot c_{4} 
+    \end{eqnarray*}
+    where $g_{7:4}$, and $p_{7:4}$ come from the ripple carry adders. 
+  \item The delay for this adder is $2 \cdot 4 + 3 = 11 \bigtriangleup$ to 
+    go through the first ripple carry adder, $2 \cdot 2 = 4 \bigtriangleup$
+    to go 
+    through the next two blocks, and $3 \bigtriangleup$ to go through the
+    multiplexor. The total delay is $18 \bigtriangleup$. 
+  \item The adder requires $28 \cdot 9 = 252$ gates for full adders, $12
+  \cdot 3 + 3 = 39$
+    gates for the multiplexors, and $2 \times 3 = 6$ gates for the carry
+  logic.  The total gate count is $297$ gates. 
+  \end{enumerate}
+\item Generalized  CSEA Gate Counts
+  \begin{enumerate}
+  \item An $n$-bit CSEA with $r$ bit blocks uses $2 \cdot n - r$ FAs, each of
+  which requires $9$ gates. 
+  \item It uses $\lceil n/r \rceil - 1$ sets of carry logic blocks, each 
+    of which requires 2 gates. 
+  \item The mux logic requires $\lceil n/r \rceil - 1$ inverters and 
+    $3 \cdot (n - r)$ AND/OR gates. 
+  \item Thus, the total number of gates used by an $n$-bit CSEA is:
+    \begin{eqnarray*}
+      & & 9 \cdot (2 \cdot n - r) + 2 \cdot (\lceil \frac{n}{r} \rceil - 1) + \\
+      & & (\lceil \frac{n}{r} \rceil - 1) + 3 \cdot (n - r) \\ 
+      & = & 21 \cdot n - 12 \cdot r + 3 \cdot \lceil \frac{n}{r} \rceil - 3 
+    \end{eqnarray*}
+  \end{enumerate}
+\item Generalized  CSEA Delay
+  \begin{enumerate}
+  \item The first block has a delay of $(2 \cdot r + 3) \bigtriangleup$
+  before the carry out is ready. 
+  \item The next $(\lceil n/r \rceil - 2)$ blocks have a delay of 
+    $2 \bigtriangleup$  for the carry logic. 
+  \item The last block has a delay of 3 for the multiplexor selection logic.
+  \item Thus, the total delay is for $s_{n-1}$ is:
+    \begin{eqnarray*}
+      2 \cdot r + 3  + 2 \cdot (\lceil \frac{n}{r} \rceil - 2) + 3 \
+      = \\
+      2 \cdot r + 2 \cdot \lceil \frac{n}{r} + 1 \rceil \approx \
+      2 \cdot r + 2 \cdot \frac{n}{r} + 2
+    \end{eqnarray*}
+  \end{enumerate}
+\item Optimizing the Block Size to Reduce Delay
+  \begin{enumerate}
+  \item The optimum block size is determined by taking the derivative
+    of the delay with respect to $r$, setting it to zero, and 
+    solving for $r$. 
+    \begin{eqnarray*}
+      2 - \frac{2 n}{r^{2}} & = & 0  \\
+      r & = & \sqrt{n} 
+    \end{eqnarray*}
+  \item Plugging this into the delay equation gives 
+    \begin{displaymath}
+      2 \sqrt{n/2} + 2 \cdot \frac{n}{\sqrt{n}} + 2 = 2 \sqrt{n} + 2
+    \end{displaymath}
+  \item For example, if $n = 16$, then the delay is minimized by
+    selecting $r = 4$, which gives a worst case delay of 
+    $4 \sqrt{16} + 2 = 18 \bigtriangleup$. 
+  \end{enumerate}
+\item Variable Length Blocks. 
+  \begin{enumerate}
+  \item The delay of the CSEA can be reduced even further by varying the
+  block size. 
+  \item A good strategy is have the first two blocks be small and have the
+  same size. Each subsequent block should have one bit larger than the
+  previous block. 
+  \item For example, a $16$ bit CSEA with block size of $(2, 2, 3, 4, 5)$ 
+    requires $322$ gates and has a worst case delay of $16 \bigtriangleup$.
+  \item Speed can also be improved by using faster block adders (e.g., CLAs) 
+    and another CLA to generate the carry bits.  
+  \end{enumerate}
+\item Characteristics of CSEAs
+  \begin{enumerate}
+  \item In general, CSEAs require even more gates than CLAs. 
+  \item The delay for CSEAs proportional to $\sqrt{n}$. It is less
+    than the delay for RCAs and CSKAs, but greater than the delay for CLAs. 
+  \item CSKAs are less regular than RCAs and CSKAs, and slightly more regular 
+    than CLAs. 
+
+    \begin{figure*}
+      \begin{center}
+	\setlength{\unitlength}{0.0105in}%
+	\epsfig{figure=sel16.eps, height=2.0in}
+      \end{center}
+      \label{csel16.fig}
+      \caption{16-bit Carry Select Adder (r = 4).}
+    \end{figure*}
+
+  \end{enumerate}
+\end{enumerate}
+
+
+
+
+\end{document}

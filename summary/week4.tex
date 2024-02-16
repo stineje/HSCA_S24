@@ -185,7 +185,8 @@ c_{k+1} & = & (g_k + p_k \cdot {c_k}^0) + c_{in} \cdot (g_k + p_k \cdot c_k^1)
 c_{k+1} & = & c_{k+1}^0 + c_{in} \cdot p_k \cdot c_k^1 \\
 c_{k+1} & = & c_{k+1}^0 + c_{in} \cdot p_{k:k-r}
 \end{eqnarray*}
-\item The previous simplification is achieved due to the absorption theorem in Boolean logic, such that:  $g_k + c_{in} \cdot g_k = g_k$.
+\item The previous simplification is achieved due to the
+  convering theorem in Boolean logic, such that:  $g_k + c_{in} \cdot g_k = g_k$.
 \item The last item assumes the basic ideas of the carry-select adder in that
   a carry-in of 1 (i.e., $c_k^1$) produces the group-propagate signal.
   Therefore, the RCA that produces the correct sum is incremented based on

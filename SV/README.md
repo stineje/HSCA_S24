@@ -6,7 +6,7 @@ This file has sample SystemVerilog files that can help you learn how to simulate
   <li>hw1: Homework 1 solutions.</li>
   <li>fsm_example: simple Mealy FSM design similar to what is found in DDCA.</li>
   <li>pipe_riscv: design found in DDCA for pipelined RISC-V but also has testbench set up for ModelSim as well as feature to see instructions in waveform.</li>
-  <li>sample: sample design that showcases how to test vectors in the testbench and output the results to a file.</li>
+  <li>sample: sample adder design that showcases how to test vectors in the testbench and output the results to a file.</li>
   <li>comparator_tree: example of a modular design but also creating a VCD file that can be used for examination of data or for power analysis.</li>
   <li>comparator_tree_genvar: example of a modular design but uses a generate statement.</li>  
 </ol>

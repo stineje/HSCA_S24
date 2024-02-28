@@ -1,0 +1,142 @@
+m255
+K4
+z2
+!s99 nomlopt
+!s11f vlog 2021.3_1 2021.08, Aug 15 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/jstine/ecen4233/HSCA_S24/SV/hw3
+T_opt
+!s110 1708818201
+VZ8f2Sj0XkN68?kJEjJ>dL1
+04 8 4 work stimulus fast 0
+=1-bc97e10bfbb0-65da7f19-e885-169ef
+!s124 OEM100
+o-quiet -auto_acc_if_foreign -work work +acc
+Z1 tCvgOpt 0
+n@_opt
+OL;O;2021.3_1;73
+vpgblackblock
+Z2 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z3 !s110 1708818200
+!i10b 1
+!s100 X5o1SN@c[]_86lCRI;<7i0
+I0h0>nQK;`Xni[EbgYhe4M0
+S1
+R0
+Z4 w1708619883
+Z5 8prob6.sv
+Z6 Fprob6.sv
+!i122 0
+L0 9 7
+Z7 VDg1SIo80bB@j0V0VzS_@n1
+Z8 OL;L;2021.3_1;73
+r1
+!s85 0
+31
+Z9 !s108 1708818200.000000
+Z10 !s107 tb_prob6.sv|prob6.sv|
+Z11 !s90 prob6.sv|tb_prob6.sv|
+!i113 0
+Z12 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R1
+vpgblock
+R2
+R3
+!i10b 1
+!s100 gzhjnIc^V>AP^BD?^e`MA2
+IV;=9O62PTafNmXhFQoN7B1
+S1
+R0
+R4
+R5
+R6
+!i122 0
+L0 1 7
+R7
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 0
+R12
+R1
+vprefixadd16
+R2
+R3
+!i10b 1
+!s100 R^aVfJn75[X8H2O1H1T@c0
+IR^c^mWcCo;fcFTn<:CDfS1
+S1
+R0
+R4
+R5
+R6
+!i122 0
+L0 24 55
+R7
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 0
+R12
+R1
+vstimulus
+R2
+R3
+!i10b 1
+!s100 5bEL?72XaKPT3d<@g>aFF0
+I7oY1>EDY7B9Pm[U]?fV:O0
+S1
+R0
+w1708818157
+8tb_prob6.sv
+Ftb_prob6.sv
+!i122 0
+L0 2 72
+R7
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 0
+R12
+R1
+vsumblock
+R2
+R3
+!i10b 1
+!s100 YoSna2cZ2lnV`EC4128BG2
+Ij>1l0KiM0VaBIUV;3_S<e2
+S1
+R0
+R4
+R5
+R6
+!i122 0
+L0 17 6
+R7
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 0
+R12
+R1

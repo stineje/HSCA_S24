@@ -80,6 +80,8 @@ void disp_bin(double x, int bits_to_left, int bits_to_right, FILE *out_file) {
     if (i == 0) {
       printf(".");
     }
+    if (i%4 == 0)
+      printf(" ");
   }
 }
 
@@ -313,7 +315,7 @@ int main(int argc, char* argv[]) {
     binary = hex2bin(num1a, validation, length);
     test = hex2dec(num1a);
     prob1a = bin2frac(binary, 1, 15);
-    printf("%s in hexadecimal is %sin binary and %d integer\n", num1a, binary, test);
+    printf("%s in hexadecimal is %s in binary and %d integer\n", num1a, binary, test);
     printf("The value is %1.20lg\n", prob1a);
   }
 
@@ -345,7 +347,7 @@ int main(int argc, char* argv[]) {
     binary = hex2bin(num2a, validation, length);
     test = hex2dec(num2a);
     prob1a = bin2frac(binary, 1, 15);
-    printf("%s in hexadecimal is %sin binary and %d integer\n", num2a, binary, test);
+    printf("%s in hexadecimal is %s in binary and %d integer\n", num2a, binary, test);
     printf("The value is %1.20lg\n", prob1a);
   }
 
@@ -376,7 +378,7 @@ int main(int argc, char* argv[]) {
     binary = hex2bin(num3a, validation, length);
     test = hex2dec(num3a);
     prob1a = bin2frac(binary, 1, 15);
-    printf("%s in hexadecimal is %sin binary and %d integer\n", num3a, binary, test);
+    printf("%s in hexadecimal is %s in binary and %d integer\n", num3a, binary, test);
     printf("The value is %1.20lg\n", prob1a);
   }
 
@@ -407,7 +409,7 @@ int main(int argc, char* argv[]) {
     binary = hex2bin(num4a, validation, length);
     test = hex2dec(num4a);
     prob1a = bin2frac(binary, 1, 15);
-    printf("%s in hexadecimal is %sin binary and %d integer\n", num4a, binary, test);
+    printf("%s in hexadecimal is %s in binary and %d integer\n", num4a, binary, test);
     printf("The value is %1.20lg\n", prob1a);
   }
 
@@ -430,47 +432,5 @@ int main(int argc, char* argv[]) {
     printf("%s in hexadecimal is %s in binary and %d integer\n", num4r, binary, test);
     printf("The value is %1.20lg\n", prob1r);
   }    
-
-
-
-  /*
-  printf("Problem 1 -> %1.20lg + %1.20lg = %1.20lg\n", prob1a, prob1b, prob1a+prob1b);
-  printf("Problem 1 -> %x + %x = %x\n", 0x6D03, 0xD936, 0x6D03+0xD936);  
-  disp_bin(prob1a, 1, 15, stdout);
-  printf("\n");
-  disp_bin(prob1b, 1, 15, stdout);
-  printf("\n");
-  disp_bin(prob1a+prob1b, 1, 15, stdout);
-  printf("\n");
-  */
-
-  /*
-  printf("Problem 2 -> %1.20lg + %1.20lg = %1.20lg\n", prob2a, prob2b, prob2a+prob2b);
-  disp_bin(prob2a, 1, 15, stdout);
-  printf("\n");
-  disp_bin(prob2b, 1, 15, stdout);
-  printf("\n");
-  disp_bin(prob2a+prob2b, 1, 15, stdout);
-  printf("\n");  
-
-  printf("Problem 3 -> %1.20lg + %1.20lg = %1.20lg\n", prob3a, prob3b, prob3a+prob3b);
-  disp_bin(prob3a, 1, 15, stdout);
-  printf("\n");
-  disp_bin(prob3b, 1, 15, stdout);
-  printf("\n");
-  disp_bin(prob3a+prob3b, 1, 15, stdout);
-  printf("\n");  
-
-  printf("Problem 4 -> %1.20lg + %1.20lg = %1.20lg\n", prob4a, prob4b, prob4a+prob4b);
-  disp_bin(prob4a, 1, 15, stdout);
-  printf("\n");
-  disp_bin(prob4b, 1, 15, stdout);
-  printf("\n");
-  disp_bin(prob4a+prob4b, 1, 15, stdout);
-  printf("\n");  
-
-  */  
-
-  
   
 }

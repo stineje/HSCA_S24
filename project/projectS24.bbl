@@ -1,0 +1,28 @@
+\begin{thebibliography}{1}
+
+\bibitem{30711}
+``{IEEE} standard for binary floating-point arithmetic,''
+\newblock {\em {ANSI/IEEE} Std 754-1985}, pp. 1--13, 1985.
+
+\bibitem{hauser}
+J.~Hauser,
+\newblock ``{The SoftFloat and TestFloat Validation Suite for Binary
+  Floating-Point Arithmetic},''
+\newblock Tech. {R}ep., University of California, Berkeley, 1999,
+\newblock Available at http://www.jhauser.us/arithmetic/TestFloat.html.
+
+\bibitem{540618}
+E.M. Schwarz,
+\newblock ``Rounding for quadratically converging algorithms for division and
+  square root,''
+\newblock in {\em Conference Record of The Twenty-Ninth Asilomar Conference on
+  Signals, Systems and Computers}, 1995, vol.~1, pp. 600--603 vol.1.
+
+\bibitem{762835}
+S.F. Oberman,
+\newblock ``Floating point division and square root algorithms and
+  implementation in the amd-k7/sup tm/ microprocessor,''
+\newblock in {\em Proceedings 14th IEEE Symposium on Computer Arithmetic (Cat.
+  No.99CB36336)}, 1999, pp. 106--115.
+
+\end{thebibliography}

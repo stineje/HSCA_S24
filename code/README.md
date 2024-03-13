@@ -21,3 +21,7 @@ The same procedure is followed for gsqrt.c where gsqrt.c is
 substituted for gdiv.c in steps 2 and 3.  Or, you can use the Makefile
 given that easily compiles everything, provided you have Make
 installed.
+
+Warning:  this code is given to help you but it is no substitute for
+your brain in checking things.  Never assume anything is right without
+checking it.  

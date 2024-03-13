@@ -35,5 +35,5 @@ gsqrt.o:	gsqrt.c
 
 clean:
 		rm -f *.o *~
-		rm -f div gsqrt
+		rm -f gdiv gdiv_opt gsqrt
 		rm -f core

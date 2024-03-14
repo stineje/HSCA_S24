@@ -1,0 +1,118 @@
+m255
+K4
+z2
+!s99 nomlopt
+!s11f vlog 2021.3_1 2021.08, Aug 15 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/jstine/ecen4233/HSCA_S24/SV/hw4
+T_opt
+Z1 !s110 1710454777
+VQh1B;6RFY4:O:JQzHLYQZ3
+04 8 4 work stimulus fast 0
+=1-bc97e10bfbb0-65f377f9-7859f-14a0e
+!s124 OEM100
+o-quiet -auto_acc_if_foreign -work work +acc
+Z2 tCvgOpt 0
+n@_opt
+OL;O;2021.3_1;73
+vcsam16x16
+Z3 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+R1
+!i10b 1
+!s100 CoZn:;[iJfGjkbUcEe10F3
+Ien=;DH2YFPRbciX_mUWMl2
+S1
+R0
+w1710454596
+8csam16x16.sv
+Fcsam16x16.sv
+!i122 0
+L0 1 578
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+Z5 OL;L;2021.3_1;73
+r1
+!s85 0
+31
+Z6 !s108 1710454777.000000
+Z7 !s107 tb_csam16x16.sv|csam16x16.sv|tadders.sv|
+Z8 !s90 tadders.sv|csam16x16.sv|tb_csam16x16.sv|
+!i113 0
+Z9 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+vfull_adder
+R3
+R1
+!i10b 1
+!s100 FjbN0KSI09B_n1o2l`;n`3
+IDHIWRVV<@<kkAm^`jCP``3
+S1
+R0
+Z10 w1710453208
+Z11 8tadders.sv
+Z12 Ftadders.sv
+!i122 0
+L0 12 11
+R4
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 0
+R9
+R2
+vhalf_adder
+R3
+R1
+!i10b 1
+!s100 A[5e2g==k0R=eNdeA<><73
+INOG=<e1fWJMiGieT6QlD<2
+S1
+R0
+R10
+R11
+R12
+!i122 0
+L0 1 9
+R4
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 0
+R9
+R2
+vstimulus
+R3
+R1
+!i10b 1
+!s100 J[bVo<Z`c3feiKLnQNEZ`2
+I?L=ZMj>c^SiTPJbFfPFG=2
+S1
+R0
+w1710454774
+8tb_csam16x16.sv
+Ftb_csam16x16.sv
+!i122 0
+L0 2 70
+R4
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 0
+R9
+R2

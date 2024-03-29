@@ -1,6 +1,8 @@
 // fp.c
 // james.stine@okstate.edu 29 March 2024
 
+// Also check https://www.h-schmidt.net/FloatConverter/IEEE754.html
+
 #include <stdio.h>
 #include <math.h>
 

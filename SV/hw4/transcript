@@ -1,7 +1,7 @@
-# do csam16x16.do
+# do csam16x16sat.do
 # QuestaSim-64 vlog 2021.3_1 Compiler 2021.08 Aug 15 2021
-# Start time: 17:19:37 on Mar 14,2024
-# vlog tadders.sv csam16x16.sv tb_csam16x16.sv 
+# Start time: 11:39:14 on Mar 30,2024
+# vlog tadders.sv csam16x16sat.sv tb_csam16x16sat.sv 
 # -- Compiling module half_adder
 # -- Compiling module full_adder
 # -- Compiling module csam16x16
@@ -9,10 +9,10 @@
 # 
 # Top level modules:
 # 	stimulus
-# End time: 17:19:37 on Mar 14,2024, Elapsed time: 0:00:00
+# End time: 11:39:14 on Mar 30,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -voptargs="+acc" work.stimulus 
-# Start time: 17:19:37 on Mar 14,2024
+# Start time: 11:39:14 on Mar 30,2024
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim-64
 # //  Version 2021.3_1 linux_x86_64 Aug 15 2021
@@ -41,8 +41,8 @@
 # configure wave not supported in batch mode
 # configure wave not supported in batch mode
 # configure wave not supported in batch mode
-#         16 tests completed with          0 errors
-# ** Note: $finish    : tb_csam16x16.sv(68)
-#    Time: 165 ns  Iteration: 2  Instance: /stimulus
-# End time: 17:19:38 on Mar 14,2024, Elapsed time: 0:00:01
+#        128 tests completed with          0 errors
+# ** Note: $finish    : tb_csam16x16sat.sv(77)
+#    Time: 1285 ns  Iteration: 2  Instance: /stimulus
+# End time: 11:39:14 on Mar 30,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0

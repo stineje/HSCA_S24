@@ -11,10 +11,10 @@ z2
 cModel Technology
 Z0 d/home/jstine/ecen4233/HSCA_S24/SV/hw4
 T_opt
-Z1 !s110 1710454777
-VQh1B;6RFY4:O:JQzHLYQZ3
+Z1 !s110 1711816754
+V]GmN:S4nhJZZ=mYzIYaF=3
 04 8 4 work stimulus fast 0
-=1-bc97e10bfbb0-65f377f9-7859f-14a0e
+=1-b07b25d4a6a8-66084032-6039a-14045
 !s124 OEM100
 o-quiet -auto_acc_if_foreign -work work +acc
 Z2 tCvgOpt 0
@@ -24,23 +24,23 @@ vcsam16x16
 Z3 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
 R1
 !i10b 1
-!s100 CoZn:;[iJfGjkbUcEe10F3
-Ien=;DH2YFPRbciX_mUWMl2
+!s100 md3_^OZHNzzEK4SO5ObKP0
+IgL_PR<<VVgHQB`fgnz2CY0
 S1
 R0
-w1710454596
-8csam16x16.sv
-Fcsam16x16.sv
+w1711816687
+8csam16x16sat.sv
+Fcsam16x16sat.sv
 !i122 0
-L0 1 578
+L0 1 583
 Z4 VDg1SIo80bB@j0V0VzS_@n1
 Z5 OL;L;2021.3_1;73
 r1
 !s85 0
 31
-Z6 !s108 1710454777.000000
-Z7 !s107 tb_csam16x16.sv|csam16x16.sv|tadders.sv|
-Z8 !s90 tadders.sv|csam16x16.sv|tb_csam16x16.sv|
+Z6 !s108 1711816754.000000
+Z7 !s107 tb_csam16x16sat.sv|csam16x16sat.sv|tadders.sv|
+Z8 !s90 tadders.sv|csam16x16sat.sv|tb_csam16x16sat.sv|
 !i113 0
 Z9 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R2
@@ -96,15 +96,15 @@ vstimulus
 R3
 R1
 !i10b 1
-!s100 J[bVo<Z`c3feiKLnQNEZ`2
-I?L=ZMj>c^SiTPJbFfPFG=2
+!s100 digLZ;aXk;`3>UYl1oNch2
+I:czUzgVaYmdCKV8`8H^Z91
 S1
 R0
-w1710454774
-8tb_csam16x16.sv
-Ftb_csam16x16.sv
+w1711816751
+8tb_csam16x16sat.sv
+Ftb_csam16x16sat.sv
 !i122 0
-L0 2 70
+L0 2 79
 R4
 R5
 r1

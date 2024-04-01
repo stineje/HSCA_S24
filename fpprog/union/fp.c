@@ -13,7 +13,7 @@ union {
 
 int main() {
 
-  a.val = 1.75;
+  a.val = 1.95;
   b.val = 1.875;
   c.val = a.val / b.val;
 

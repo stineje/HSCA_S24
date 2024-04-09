@@ -1,3 +1,4 @@
+// 16-bit x 12-bit Baugh-Wooley Multiplier
 module mult (Z, X, Y);
    
    input logic [11:0] Y;

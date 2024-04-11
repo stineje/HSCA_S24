@@ -1,0 +1,21 @@
+#
+# Synopsys Power Estimation
+#
+
+To run VCD output, type making sure to use -c 
+option to not have any GUI output from vsim:
+
+vsim -do fma16.do -c
+
+VCD file is created from testbench
+create_vcd.sv - to change vcd output into SAIF, type:
+
+vcd2saif -input fma16.vcd -output fma16.saif
+
+can also type:
+
+vcd2saif -i fma16.vcd -o fma16.saif
+
+Note:  the view wave and add wave commands are commented out of the DO
+file to avoid WLF files which can be large.
+

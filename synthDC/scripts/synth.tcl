@@ -12,7 +12,7 @@ suppress_message {VER-173}
 
 # get outputDir from environment (Makefile)
 set saifpower 1
-set maxopt 1
+set maxopt 0
 set outputDir ./
 
 # Enables name mapping
@@ -25,6 +25,7 @@ set my_verilog_files [glob hdl/*]
 
 # Set toplevel
 set my_toplevel fma16
+#set my_toplevel DW_fp_div_inst
 
 # Set number of significant digits
 set report_default_significant_digits 6
@@ -59,7 +60,7 @@ set_false_path -from [get_ports reset]
 # Set Frequency in [MHz] or period in [ns]
 set my_clock_pin clk
 set my_uncertainty 0.0
-set my_clk_freq_MHz 200
+set my_clk_freq_MHz 10
 set my_period [expr 1000.0 / $my_clk_freq_MHz]
 
 # Create clock object 

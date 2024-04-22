@@ -1,4 +1,4 @@
-#
+1#
 # Synthesis Synopsys Flow
 # james.stine@okstate.edu 27 Sep 2015
 #
@@ -12,7 +12,7 @@ suppress_message {VER-173}
 
 # get outputDir from environment (Makefile)
 set saifpower 1
-set maxopt 0
+set maxopt 1
 set outputDir ./
 
 # Enables name mapping
@@ -59,7 +59,7 @@ set_false_path -from [get_ports reset]
 # Set Frequency in [MHz] or period in [ns]
 set my_clock_pin clk
 set my_uncertainty 0.0
-set my_clk_freq_MHz 250
+set my_clk_freq_MHz 200
 set my_period [expr 1000.0 / $my_clk_freq_MHz]
 
 # Create clock object 

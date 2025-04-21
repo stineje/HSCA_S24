@@ -1,12 +1,11 @@
+//
+// rne.c 
+// Basic round-to-nearest-even of a fp number input
+// james.stine@okstate.edu e 11 November 2020
+// 
+
 #include <stdio.h>
 #include <math.h>
-
-/*
-	This routine performs the RNE rounding.  The user inputs 
-        value she/he wants to round and the rounded value gets
-        printed out.
-        
-*/
 
 /*
   Rounding Calls
@@ -85,20 +84,36 @@ void disp_bin(double x, int bits_to_left, int bits_to_right, FILE *out_file) {
 }
 
 
-main(int argc, char* argv[]) {
-   double N;
-   int precision;
-   int num_iter, i;
+int main(int argc, char* argv[]) {
+  double N, N_rnd;
+  double absolute_error;
+  int precision;
+  int num_iter, i;
 
-   sscanf(argv[1],"%lg", &N);
-   sscanf(argv[2],"%d", &precision);
-
-   printf("Number before rounding = %1.15lg\n", N);
-   disp_bin(N, 1, 15, stdout);
-   printf("\n");
-   N = rnd_near(N, precision);
-   disp_bin(N, 1, precision, stdout);
-   printf("\n");
-   printf("Number after rounding = %lg\n", N);
-
+  
+  // Check if enough arguments were passed
+  if (argc < 3) {
+    fprintf(stderr, "Error: Not enough arguments.\n");
+    fprintf(stderr, "Usage: %s <number> <precision>\n", argv[0]);
+    return 1;
+    }
+  
+  sscanf(argv[1],"%lg", &N);
+  sscanf(argv[2],"%d", &precision);
+  
+  printf("Number before rounding = %1.15lg\n", N);
+  disp_bin(N, 1, 15, stdout);
+  printf("\n\n");
+  N_rnd = rnd_near(N, precision);
+  printf("Number after rounding = %lg\n", N_rnd);
+  disp_bin(N_rnd, 1, precision, stdout);
+  printf("\n");
+  absolute_error = fabs(N_rnd - N);
+  printf("Absolute error = %1.15lg\n", absolute_error);
+  if (absolute_error > 0.0) {
+    printf("Number of bits (error) = %1.15lg\n", log2(absolute_error));
+  } else {
+    printf("Number of bits (error) = -inf (no error)\n");
+  }
+  
 }

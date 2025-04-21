@@ -1,7 +1,7 @@
 //
 // rne.c 
 // Basic round-to-nearest-even of a fp number input
-// james.stine@okstate.edu e 11 November 2020
+// james.stine@okstate.edu 11 November 2020
 // 
 
 #include <stdio.h>
